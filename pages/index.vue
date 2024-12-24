@@ -1,0 +1,25 @@
+<template>
+    <div class="content">
+<NextAppoinmentCard />
+<RecentDeals />
+<Customers />
+<CustomersStats />
+<ActivityDetails />
+<TasksList />
+    </div>
+</template>
+
+<script lang="ts" setup>
+
+
+</script>
+
+
+<style lang="scss">
+.content{
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+</style>
