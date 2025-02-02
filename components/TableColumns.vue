@@ -11,9 +11,9 @@
 
 <script lang="ts" setup>
 	import { computed } from "vue";
-	const { columns } = defineProps<{ columns: string[]; ImageUrl: string }>();
+	const { columns,ImageUrl } = defineProps<{ columns: string[]; ImageUrl: string }>();
 
-	const gridStyle = computed(() => `columns-${columns.length + 1}`);
+	const gridStyle = computed(() => `columns-${columns.length}`);
 </script>
 
 <style lang="scss" scoped>
@@ -26,13 +26,13 @@
 		font-weight: 400;
 
 		//page Customers
-		&.columns-6 {
+		&.columns-5 {
 			grid-template-columns: 0.65fr 4fr 3.5fr 2.5fr 4fr 0fr 0fr;
 		}
 
 		//page Deals
 		&.columns-7 {
-			grid-template-columns: 0.5fr 4fr 1fr 2fr 1.4fr 1fr 0fr 0fr;
+			grid-template-columns: 0.4fr 3fr 1fr 2fr 1.4fr 1fr 1fr 0fr;
 		}
 	}
 </style>

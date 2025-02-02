@@ -6,7 +6,7 @@
 		</div>
 
 		<div class="appoinment-card__address">
-			<img src="@/assets/icons/image.svg" alt="" />
+			<img src="@/assets/icons/DefaultImg.svg" alt="" />
 			<div>
 				<p style="font-weight: 500">319 Haul Road</p>
 				<p style="font-weight: 300">Glenrock,<span> WY 12345</span></p>

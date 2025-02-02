@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
 			});
 			return deals;
 		} catch (error) {
-			console.error("Error fetching deals:", error);
+			console.error("ОШибка при загрузке сделок:", error);
 			return sendError(event, new Error("Ошибка при получении сделок"));
 		}
 	}

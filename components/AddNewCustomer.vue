@@ -9,11 +9,15 @@
 			<div class="add-customer-modal__content">
 				<div class="add-customer-modal__upload-avatar">
 					<h4>Avatar</h4>
-					<label class="upload-file">
+					<div class="add-customer-modal__avatar-upload-flex">
+						<label class="add-customer-modal__upload-file">
 						ADD
 						<input type="file" accept="image/*" @change="onAvatarChange" />
 					</label>
-					<img v-if="avatarPreview" :src="avatarPreview" alt="" />
+					<div class="add-customer-modal__avatar-preview">
+						<img v-if="avatarPreview" :src="avatarPreview" alt="" />
+					</div>
+					</div>
 				</div>
 
 				<div class="add-customer-modal__contact-fields">
@@ -78,6 +82,7 @@
 	import { $fetch } from "ofetch";
 
 	const emit = defineEmits(["close", "customerAdded"]);
+
 
 	const customer = ref({
 		firstName: "",
@@ -154,7 +159,11 @@
 			}
 			.add-customer-modal__content {
 				.add-customer-modal__upload-avatar {
-					.upload-file {
+					.add-customer-modal__avatar-upload-flex{
+						display: flex;
+						align-items: center;
+						gap: 10px;
+						.add-customer-modal__upload-file {
 						padding: 10px 20px;
 						background-color: #f6fafd;
 						color: #7e92a2;
@@ -178,6 +187,15 @@
 					input {
 						display: none;
 					}
+					.add-customer-modal__avatar-preview{
+						img{
+							width: 50px;
+							height: 50px;
+							border-radius: 50%;
+						}
+					}
+					}
+
 				}
 
 				.add-customer-modal__contact-fields {

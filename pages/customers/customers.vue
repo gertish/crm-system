@@ -1,32 +1,26 @@
 <template>
-	<BaseTable
-		:title="`customers`"
-		:total="customers.length"
-		:sortOptions="customerSortOptions"
-		:rows="processedCustomers"
-		:columns="columns"
-		:ImageUrl="ImageUrl"
-	>
-		<template #avatar="{ src }">
-			<div class="custom-avatar">
-				<img :src="src" alt="" />
-			</div>
-		</template>
+	<div class="customers">
+		<TableHeader :title="`customers`" :total="customers.length" :sortOptions="customerSortOptions" />
 
-		<template #cell="{ row }">
-			<div class="custom-cell">
-				{{ row }}
-			</div>
-		</template>
-	</BaseTable>
+		<TableColumns :columns="customerOptions" :ImageUrl="ImageUrl"/>
+
+		<div v-if="customers.length > 0">
+			<div v-for="customer in customers" :key="customer.id">
+			<CustomerItem :item="customer" />
+		</div>
+		</div>
+		<div class="customer__not-found" v-else>
+			<img src="@/assets/icons/CustomerNotFound.svg" alt="">
+			<p>No customer found.</p>
+		</div>
+	</div>
 </template>
 
 <script lang="ts" setup>
-	import { ref, onMounted, computed, provide } from "vue";
+	import { ref, onMounted, provide } from "vue";
 	import IconUrl from "@/assets/icons/User-octagon.svg";
-	import type { Customer } from "~/types/customer.d.ts";
+	import type { Customer } from "~/types/customer";
 	import { $fetch } from "ofetch";
-	import { getAvatarUrl } from "@/utils/avatar";
 	import { useEntityLength } from "~/store/EntityLength";
 
 	const ImageUrl = IconUrl;
@@ -36,14 +30,8 @@
 
 	const customerSortOptions = ["Name", "Date Created", "Email"];
 
-	const columns = ["Name", "Email", "Phone", "Address", "Edit"];
+	const customerOptions = ["Name", "Email", "Phone", "Address", "Edit"];
 
-	const processedCustomers = computed(() => {
-		return customers.value.map((customer: Customer) => ({
-			...customer,
-			avatar: getAvatarUrl(customer.avatar),
-		}));
-	});
 
 	const fetchCustomers = async () => {
 		try {
@@ -59,3 +47,32 @@
 	provide("customers", customers);
 	onMounted(fetchCustomers);
 </script>
+
+<style lang="scss">
+.customers{
+	padding: 34px 24px 24px;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+
+	.customer__not-found {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 15px;
+	height: 100%;
+
+	img{
+		height: 50px;
+		width: 50px;
+	}
+
+	p{
+		font-size: 50px;
+		color: #7e92a2;
+		font-weight: 400;
+	}
+	
+}
+}
+</style>

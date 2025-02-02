@@ -35,15 +35,15 @@
 import { computed, ref, watch, inject } from "vue";
 import type { Ref } from "vue";
 import { useRoute } from "vue-router";
-import { useTasksStore } from "~/store/taskStore";
 import type { Customer } from "~/types/customer.d.ts";
 import type { Deal } from "~/types/deal.d.ts";
 import type { Task } from "~/types/tasks.d.ts";
 const route = useRoute();
-const taskStore = useTasksStore();
+
 
 const customers = inject<Ref<Customer[]> | undefined>("customers");
 const deals = inject<Ref<Deal[]> | undefined>("deals");
+const tasks = inject<Ref<Task[]> | undefined>("tasks");
 
 const isDealsPage = computed(() => route.path === "/deals/deals");
 const isCustomerPage = computed(() => route.path === "/customers/customers");
@@ -86,8 +86,7 @@ const addDeal = (newDeal: Deal) => {
 };
 
 const addTasks = (newTask: Task) => {
-	console.log("Adding task:", newTask);
-	taskStore.addTasks(newTask);
+	tasks?.value.push(newTask);
 };
 
 const handleModalOrEntity = () => {
@@ -119,8 +118,8 @@ const title = computed(() => {
 			return "Customers";
 		case "tasks-tasks":
 			return "Tasks";
-		// case "customerDetails-customerDetails":
-		//   return "Customer Details"
+		case "customerDetails-id":
+		return "Customer Details"
 		default:
 			return "Dashboard";
 	}

@@ -84,9 +84,7 @@
 		min-height: 800px;
 		padding: 20px 19px 0 20px;
 		background-color: #f6fafd;
-		max-width: 90px;
-		display: flex;
-		justify-content: center;
+		
 
 		&__menu {
 			flex-direction: column;

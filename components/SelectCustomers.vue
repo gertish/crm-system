@@ -42,7 +42,6 @@
 <script lang="ts" setup>
 	import { ref, onMounted } from "vue";
 	import { $fetch } from "ofetch";
-	import { getAvatarUrl } from "@/utils/avatar";
 	import type { Customer } from "~/types/customer.d.ts";
 	const emit = defineEmits(["close", "customerSelected"]);
 
